@@ -33,7 +33,9 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -48,6 +50,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentDataType.Companion.Date
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -302,6 +305,47 @@ fun BioData(modifier: Modifier) {
                         color = colorResource(id = R.color.white),
                         fontWeight = FontWeight.Bold, fontSize = 16.sp
                     )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .fillMaxWidth()
+        ) { data ->
+            val lines = data.visuals.message.split("\n")
+            Snackbar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { data.dismiss() },
+                containerColor = Color(0xFF2C2C2C),
+                shape = RoundedCornerShape(16.dp),
+                action = null
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    if (lines.isNotEmpty()) {
+                        Text(
+                            text = lines[0],
+                            color = colorResource(id = R.color.teal_200),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        for (i in 1 until lines.size) {
+                            Text(
+                                text = lines[i],
+                                color = Color.White,
+                                fontSize = 13.sp
+                            )
+                            if (i < lines.size - 1) {
+                                Spacer(modifier = Modifier.height(4.dp))
+                            }
+                        }
+                    }
                 }
             }
         }
