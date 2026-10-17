@@ -61,4 +61,10 @@ fun BioData(modifier: Modifier) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    val isFormValid = textNamaDepan.isNotEmpty() &&
+            textNamaBelakang.isNotEmpty() &&
+            textEmail.isNotEmpty() &&
+            textTglLahir.isNotEmpty() &&
+            textExperience.isNotEmpty()
 }
