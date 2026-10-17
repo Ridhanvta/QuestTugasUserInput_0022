@@ -22,6 +22,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -31,6 +33,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -53,6 +56,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -261,6 +265,44 @@ fun BioData(modifier: Modifier) {
                     }
                 }
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
+
+                Button(
+                    modifier = Modifier.fillMaxWidth().height(55.dp),
+                    enabled = isFormValid, // Menggunakan state validasi
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.purple_500),
+                        disabledContainerColor = colorResource(id = R.color.purple_200)
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    onClick = {
+                        val selectedSkills = mutableListOf<String>()
+                        if (checkAndroid) selectedSkills.add(strAndroid)
+                        if (checkUiUx) selectedSkills.add(strUiUx)
+                        if (checkWeb) selectedSkills.add(srtWeb)
+                        val skillsText = if (selectedSkills.isEmpty()) "-" else selectedSkills.joinToString(", ")
+
+                        val resultMessage = "Data Pendaftaran Berhasil :\n" +
+                                "• Nama : $textNamaDepan $textNamaBelakang\n" +
+                                "• Tanggal Lahir : $textTglLahir\n" +
+                                "• Pengalaman : $textExperience\n" +
+                                "• Email : $textEmail\n" +
+                                "• Skills : $skillsText"
+
+                        scope.launch {
+                            snackbarHostState.currentSnackbarData?.dismiss()
+                            snackbarHostState.showSnackbar(
+                                message = resultMessage,
+                                duration = SnackbarDuration.Indefinite
+                            )
+                        }
+                    }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.proceed),
+                        color = colorResource(id = R.color.white),
+                        fontWeight = FontWeight.Bold, fontSize = 16.sp
+                    )
+                }
             }
         }
     }
