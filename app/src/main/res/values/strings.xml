@@ -11,4 +11,5 @@
     <string name="android">Android</string>
     <string name="ui_ux">UI/UX</string>
     <string name="web">Web</string>
+    <string name="proceed">Proceed</string>
 </resources>
