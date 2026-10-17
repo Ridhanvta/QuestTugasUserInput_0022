@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,4 +68,8 @@ fun BioData(modifier: Modifier) {
             textEmail.isNotEmpty() &&
             textTglLahir.isNotEmpty() &&
             textExperience.isNotEmpty()
+
+    val strAndroid = stringResource(R.string.android)
+    val strUiUx = stringResource(R.string.ui_ux)
+    val srtWeb = stringResource(R.string.web)
 }
