@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenuItem
@@ -235,6 +236,31 @@ fun BioData(modifier: Modifier) {
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
+
+                Text(
+                    text = stringResource(id = R.string.skill),
+                    fontWeight = FontWeight.Bold, fontSize = 14.sp, modifier = Modifier.fillMaxWidth()
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(checked = checkAndroid, onCheckedChange = { checkAndroid = it })
+                        Text(text = strAndroid, fontSize = 13.sp)
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(checked = checkUiUx, onCheckedChange = { checkUiUx = it })
+                        Text(text = strUiUx, fontSize = 13.sp)
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(checked = checkWeb, onCheckedChange = { checkWeb = it })
+                        Text(text = srtWeb, fontSize = 13.sp)
+                    }
+                }
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
             }
         }
     }
