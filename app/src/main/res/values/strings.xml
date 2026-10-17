@@ -8,5 +8,7 @@
     <string name="tgl_lahir">Tgl Lahir</string>
     <string name="experience">Experience</string>
     <string name="skill">Pilih Skill Anda :</string>
-
+    <string name="android">Android</string>
+    <string name="ui_ux">UI/UX</string>
+    <string name="web">Web</string>
 </resources>
