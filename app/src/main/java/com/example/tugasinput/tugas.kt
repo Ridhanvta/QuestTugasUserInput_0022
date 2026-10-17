@@ -39,6 +39,7 @@ fun DatePickerModal(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BioData(modifier: Modifier) {
     var textNamaDepan by remember { mutableStateOf("") }
@@ -50,4 +51,7 @@ fun BioData(modifier: Modifier) {
     var checkAndroid by remember { mutableStateOf(false) }
     var checkUiUx by remember { mutableStateOf(false) }
     var checkWeb by remember { mutableStateOf(false) }
+
+    var expandedDropdown by remember { mutableStateOf(false) }
+    val experienceOption = listOf("<1Tahun","1-3Tahun",">3Tahun")
 }
