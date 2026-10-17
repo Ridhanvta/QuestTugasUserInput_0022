@@ -77,7 +77,7 @@ fun DatePickerModal(
         confirmButton = {
             TextButton(onClick = {
                 onDateSelected(datePickerState.selectedDateMillis)
-                onDismiss
+                onDismiss()
             }) { Text("Pilih") }
         },
         dismissButton = {
