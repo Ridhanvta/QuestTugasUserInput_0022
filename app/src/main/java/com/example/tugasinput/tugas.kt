@@ -2,6 +2,7 @@ package com.example.tugasinput
 
 
 import androidx.annotation.OptIn
+import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -30,7 +31,12 @@ fun DatePickerModal(
                 onDismiss
             }) { Text("Pilih") }
         },
-    ) { }
+        dismissButton = {
+            TextButton(onClick = onDismiss) {Text("Batal") }
+        }
+    ) {
+        DatePicker(state = datePickerState)
+    }
 }
 
 @Composable
