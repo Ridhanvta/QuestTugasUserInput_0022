@@ -4,6 +4,7 @@ package com.example.tugasinput
 import android.media.Image
 import androidx.annotation.OptIn
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,9 +18,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -34,6 +38,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentDataType.Companion.Date
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -42,6 +47,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,7 +89,7 @@ fun BioData(modifier: Modifier) {
     var checkWeb by remember { mutableStateOf(false) }
 
     var expandedDropdown by remember { mutableStateOf(false) }
-    val experienceOption = listOf("<1Tahun","1-3Tahun",">3Tahun")
+    val experienceOption = listOf("<1Tahun", "1-3Tahun", ">3Tahun")
 
     var showDatePicker by remember { mutableStateOf(false) }
 
@@ -142,14 +150,14 @@ fun BioData(modifier: Modifier) {
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
                 ) {
                     OutlinedTextField(
-                        value = textNamaDepan, onValueChange = {textNamaDepan=it},
-                        label = {Text(stringResource(R.string.nama_depan))},
+                        value = textNamaDepan, onValueChange = { textNamaDepan = it },
+                        label = { Text(stringResource(R.string.nama_depan)) },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
                     )
                     OutlinedTextField(
-                        value = textNamaBelakang, onValueChange = {textNamaBelakang=it},
-                        label = {Text(stringResource(R.string.nama_belakang))},
+                        value = textNamaBelakang, onValueChange = { textNamaBelakang = it },
+                        label = { Text(stringResource(R.string.nama_belakang)) },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -161,6 +169,42 @@ fun BioData(modifier: Modifier) {
                     label = { Text(stringResource(id = R.string.email)) },
                     modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)
                 )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+                ) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        OutlinedTextField(
+                            value = textTglLahir, onValueChange = {},
+                            readOnly = true,
+                            label = { Text(stringResource(id = R.string.tgl_lahir)) },
+                            trailingIcon = {
+                                Icon(
+                                    Icons.Default.DateRange,
+                                    contentDescription = null
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)
+                        )
+                        Box(
+                            modifier = Modifier.matchParentSize()
+                                .clickable { showDatePicker = true })
+                    }
+                    if (showDatePicker) {
+                        DatePickerModal(
+                            onDateSelected = { milidetik ->
+                                if (milidetik != null) {
+                                    val formatter =
+                                        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                    textTglLahir = formatter.format(Date(milidetik))
+                                }
+                            },
+                            onDismiss = { showDatePicker = false }
+                        )
+                    }
+                }
             }
         }
     }
