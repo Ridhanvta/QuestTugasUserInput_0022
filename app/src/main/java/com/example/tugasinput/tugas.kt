@@ -147,6 +147,12 @@ fun BioData(modifier: Modifier) {
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
                     )
+                    OutlinedTextField(
+                        value = textNamaBelakang, onValueChange = {textNamaBelakang=it},
+                        label = {Text(stringResource(R.string.nama_belakang))},
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
                 }
             }
         }
