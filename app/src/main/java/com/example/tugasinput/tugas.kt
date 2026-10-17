@@ -164,12 +164,14 @@ fun BioData(modifier: Modifier) {
                 ) {
                     OutlinedTextField(
                         value = textNamaDepan, onValueChange = { textNamaDepan = it },
+                        singleLine = true,
                         label = { Text(stringResource(R.string.nama_depan)) },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
                     )
                     OutlinedTextField(
                         value = textNamaBelakang, onValueChange = { textNamaBelakang = it },
+                        singleLine = true,
                         label = { Text(stringResource(R.string.nama_belakang)) },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(12.dp)
@@ -271,7 +273,7 @@ fun BioData(modifier: Modifier) {
 
                 Button(
                     modifier = Modifier.fillMaxWidth().height(55.dp),
-                    enabled = isFormValid, // Menggunakan state validasi
+                    enabled = isFormValid,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.purple_500),
                         disabledContainerColor = colorResource(id = R.color.purple_200)
