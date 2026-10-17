@@ -14,4 +14,8 @@ fun BioData(modifier: Modifier) {
     var textEmail by remember { mutableStateOf("") }
     var textTglLahir by remember { mutableStateOf("") }
     var textExperience by remember { mutableStateOf("") }
+
+    var checkAndroid by remember { mutableStateOf(false) }
+    var checkUiUx by remember { mutableStateOf(false) }
+    var checkWeb by remember { mutableStateOf(false) }
 }
