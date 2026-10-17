@@ -54,4 +54,6 @@ fun BioData(modifier: Modifier) {
 
     var expandedDropdown by remember { mutableStateOf(false) }
     val experienceOption = listOf("<1Tahun","1-3Tahun",">3Tahun")
+
+    var showDatePicker by remember { mutableStateOf(false) }
 }
